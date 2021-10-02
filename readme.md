@@ -2,7 +2,7 @@
 
 ## To run the application
 
-> Make sure you are in - mernStack-file-upload/ directory & type the following command on your termianl to run backend side of the project :
+> Make sure you are in - nodejs-express-mongodb-api/ directory & type the following command on your termianl to run backend side of the project :
 ```
 1. cd nodejs-express-mongodb-api/
 2. npm install
