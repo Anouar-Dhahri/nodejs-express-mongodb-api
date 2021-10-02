@@ -1,0 +1,228 @@
+{
+    "swagger": "2.0.0",
+    "info": {
+        "version": "1.0.0",
+        "title": "Games CRUD App",
+        "description": "My games project application API "
+    },
+    "host": "localhost:3100",
+    "basePath": "/api/games",
+    "tags": [
+        {
+            "name": "Games",
+            "description": "API for games in the system"
+        }
+    ],
+    "schemes": ["http"],
+    "consumes": ["application/json"],
+    "produces": ["application/json"],
+    "paths": {
+        "/get": {
+            "get": {
+                "summary": "Get all games in the system",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Games"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                } 
+            }
+        },
+        "/create": {
+            "post": {
+                "summary": "Create new game in the system",
+                "parameters": [
+                    {
+                        "name": "game",
+                        "in": "body",
+                        "description": "User that we want to create",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Game saved successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/find/{id}": {
+            "parameters":[
+                {
+                    "name": "id",
+                    "in":"path",
+                    "required": true,
+                    "description": "ID of the game that we want to find",
+                    "type":"string"
+                }
+            ],
+            "get": {
+                "summary": "Find a game in the system",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/update/{id}": {
+            "parameters": [
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the game that we want to update",
+                    "type":"string"
+                }
+            ],
+            "put": {
+                "summary": "Update game with give ID",
+                "parameters": [
+                    {
+                        "name": "game",
+                        "in": "body",
+                        "description": "Game with new values of properties",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    }
+                ],
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Game with the id: '+id+' is updated successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/delete/{id}": {
+            "parameters": [            
+                {
+                    "name": "id",
+                    "in": "path",
+                    "required": true,
+                    "description": "ID of the game that we want to delete",
+                    "type":"string"
+                }
+            ],
+            "delete": {
+                "summary": "Delete one game from the system",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "Game with the id: '+id+' is deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Game"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/delete": {
+            "delete" : {
+                "summary": "delete all games from the system",
+                "produces": ["application/json"],
+                "responses": {
+                    "200": {
+                        "description": "all Games deleted successfully",
+                        "schema": {
+                            "$ref": "#/definitions/Games"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Game": {
+            "required": [],
+            "properties": {
+                "title": {
+                    "type": "string"
+                },
+                "genre": {
+                    "type": "string"
+                },
+                "multiplayer": {
+                    "type": "boolean"
+                },
+                "developedBy": {
+                    "type": "string"
+                },
+                "publisher": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number",
+                    "format": "double"
+                },
+                "releaseDate": {
+                    "type": "string",
+                    "format": "date"
+                }
+            }
+        },
+        "Games": {
+            "type": "array",
+            "$ref": "#/definitions/Game"
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "message": { "type": "string" }
+            }
+        }
+    }
+}
